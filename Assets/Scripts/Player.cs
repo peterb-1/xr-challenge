@@ -27,5 +27,11 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = new Vector3(mx * movementSpeed, 0, mz * movementSpeed);
+
+        // Cap movement speed (e.g. when moving diagonally)
+        if (rb.velocity.magnitude > movementSpeed)
+        {
+            rb.velocity = movementSpeed * Vector3.Normalize(rb.velocity);
+        }
     }
 }
