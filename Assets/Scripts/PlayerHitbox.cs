@@ -7,12 +7,18 @@ public class PlayerHitbox : MonoBehaviour
 {
 
     public event Action<int> OnPickUp;
+    public event Action OnExit;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Pickup")
+        switch (other.gameObject.tag)
         {
-            HandlePickup(other);
+            case "Pickup":
+                HandlePickup(other);
+                break;
+            case "Exit":
+                HandleExit(other);
+                break;
         }
     }
 
@@ -20,5 +26,10 @@ public class PlayerHitbox : MonoBehaviour
     {
         int score = other.gameObject.GetComponent<Pickup>().GetPickedUp();
         if (score > -1) OnPickUp?.Invoke(score);
+    }
+
+    private void HandleExit(Collider other)
+    {
+        OnExit?.Invoke();
     }
 }

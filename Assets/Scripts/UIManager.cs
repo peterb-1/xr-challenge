@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
         player.OnPickUp += UpdateScore;
     }
 
-    public void UpdateScore(int increment)
+    private void UpdateScore(int increment)
     {
         score += increment;
         scoreText.text = "SCORE: " + score;
