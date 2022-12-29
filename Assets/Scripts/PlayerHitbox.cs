@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerHitbox : MonoBehaviour
 {
     public event Action<int> OnPickUp;
+    public event Action OnDeath;
     public event Action OnExit;
 
     private void OnTriggerEnter(Collider other)
@@ -15,8 +16,11 @@ public class PlayerHitbox : MonoBehaviour
             case "Pickup":
                 HandlePickup(other);
                 break;
+            case "Death":
+                HandleDeath();
+                break;
             case "Exit":
-                HandleExit(other);
+                HandleExit();
                 break;
         }
     }
@@ -27,7 +31,13 @@ public class PlayerHitbox : MonoBehaviour
         if (score > -1) OnPickUp?.Invoke(score);
     }
 
-    private void HandleExit(Collider other)
+    private void HandleDeath()
+    {
+        Debug.Log("Initiating death sequence...");
+        OnDeath?.Invoke();
+    }
+
+    private void HandleExit()
     {
         OnExit?.Invoke();
     }
