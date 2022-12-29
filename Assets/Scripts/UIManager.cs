@@ -31,6 +31,9 @@ public class UIManager : MonoBehaviour
         scoreText.text = "SCORE: " + score;
     }
 
+    /// <summary>
+	/// Shows the UI on completing the level
+	/// </summary>
     private void ShowEndUI()
     {
         finishText.SetActive(true);

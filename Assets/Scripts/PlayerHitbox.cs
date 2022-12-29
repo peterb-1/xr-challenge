@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerHitbox : MonoBehaviour
 {
-
     public event Action<int> OnPickUp;
     public event Action OnExit;
 

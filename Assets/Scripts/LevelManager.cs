@@ -6,7 +6,8 @@ public class LevelManager : MonoBehaviour
 {
     [Header("Config")]
     [SerializeField]
-    private Transform location;
+    private Transform exitLocation;
+    public Transform ExitLocation => exitLocation;
 
     [Header("References")]
     [SerializeField]
@@ -14,10 +15,23 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private PlayerHitbox player;
 
+    public static LevelManager instance { get; private set; }
+
+    void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
     void Start()
     {
         player.OnPickUp += SpawnExit;
-        player.OnExit += FinishLevel;
     }
 
     /// <summary>
@@ -30,14 +44,6 @@ public class LevelManager : MonoBehaviour
         {
             if (!p.IsCollected) return;
         }
-        Instantiate(exit, location, false);
-    }
-
-    /// <summary>
-	/// Initiate the end-of-level process
-	/// </summary>
-    private void FinishLevel()
-    {
-        Debug.Log("Finishing the level...");
+        Instantiate(exit, exitLocation, false);
     }
 }
