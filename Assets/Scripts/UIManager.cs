@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject finishText;
     [SerializeField]
+    private GameObject filter;
+    [SerializeField]
     private PlayerHitbox player;
 
     private int score;
@@ -37,5 +39,6 @@ public class UIManager : MonoBehaviour
     private void ShowEndUI()
     {
         finishText.SetActive(true);
+        filter.SetActive(true);
     }
 }
