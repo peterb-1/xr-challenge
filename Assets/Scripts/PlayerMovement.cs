@@ -18,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        this.gameObject.GetComponent<PlayerHitbox>().OnExit += EndMovement;
     }
 
     void Update()
@@ -41,18 +40,25 @@ public class PlayerMovement : MonoBehaviour
     }
 
     /// <summary>
-	/// Lock the player's movement at the end of the level and center them on the exit
+	/// Lock the player's movement (but does not cancel their momentum)
 	/// </summary>
-    private void EndMovement()
+    public void Lock()
     {
         locked = true;
-        StartCoroutine(MoveToTarget(LevelManager.instance.ExitLocation.position));
+    }
+
+    /// <summary>
+	/// Stop the player's movement
+	/// </summary>
+    public void Stop()
+    {
+        rb.velocity = Vector3.zero;
     }
 
     /// <summary>
 	/// Smoothly move the player towards the target
 	/// </summary>
-    IEnumerator MoveToTarget(Vector3 target)
+    public IEnumerator MoveToTarget(Vector3 target)
     {
         for (int i = 0; i < 60; i++)
         {

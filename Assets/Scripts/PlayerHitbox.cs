@@ -33,7 +33,6 @@ public class PlayerHitbox : MonoBehaviour
 
     private void HandleDeath()
     {
-        Debug.Log("Initiating death sequence...");
         OnDeath?.Invoke();
     }
 
