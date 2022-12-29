@@ -17,8 +17,12 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         player.OnPickUp += SpawnExit;
+        player.OnExit += FinishLevel;
     }
 
+    /// <summary>
+	/// Makes the exit appear in the level if all pickups have been collected
+	/// </summary>
     private void SpawnExit(int placeholder)
     {
         Pickup[] pickups = FindObjectsOfType<Pickup>();
@@ -26,7 +30,14 @@ public class LevelManager : MonoBehaviour
         {
             if (!p.IsCollected) return;
         }
-        Debug.Log("Trying to create exit...");
         Instantiate(exit, location, false);
+    }
+
+    /// <summary>
+	/// Initiate the end-of-level process
+	/// </summary>
+    private void FinishLevel()
+    {
+        Debug.Log("Finishing the level...");
     }
 }

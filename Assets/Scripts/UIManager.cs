@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI scoreText;
     [SerializeField]
+    private GameObject finishText;
+    [SerializeField]
     private PlayerHitbox player;
 
     private int score;
@@ -17,11 +19,20 @@ public class UIManager : MonoBehaviour
     {
         score = 0;
         player.OnPickUp += UpdateScore;
+        player.OnExit += ShowEndUI;
     }
 
+    /// <summary>
+	/// Displays the updated score on the UI
+	/// </summary>
     private void UpdateScore(int increment)
     {
         score += increment;
         scoreText.text = "SCORE: " + score;
+    }
+
+    private void ShowEndUI()
+    {
+        finishText.SetActive(true);
     }
 }
