@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
     private void EndLevel()
     {
         movement.Lock();
+        movement.SetFriction(.6f);
         StartCoroutine(movement.MoveToTarget(LevelManager.instance.ExitLocation.position, .999f, 1.2f));
     }
 }
