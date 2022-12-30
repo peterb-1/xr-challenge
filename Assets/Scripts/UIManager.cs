@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI scoreText;
     [SerializeField]
+    private GameObject deathText;
+    [SerializeField]
     private GameObject finishText;
     [SerializeField]
     private GameObject filter;
@@ -21,6 +23,7 @@ public class UIManager : MonoBehaviour
     {
         score = 0;
         player.OnPickUp += UpdateScore;
+        player.OnDeath += ShowDeathUI;
         player.OnExit += ShowEndUI;
     }
 
@@ -31,6 +34,15 @@ public class UIManager : MonoBehaviour
     {
         score += increment;
         scoreText.text = "SCORE: " + score;
+    }
+
+    /// <summary>
+	/// Shows the UI on player death
+	/// </summary>
+    private void ShowDeathUI()
+    {
+        deathText.SetActive(true);
+        filter.SetActive(true);
     }
 
     /// <summary>

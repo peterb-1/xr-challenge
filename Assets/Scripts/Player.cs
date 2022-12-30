@@ -39,6 +39,6 @@ public class Player : MonoBehaviour
     private void EndLevel()
     {
         movement.Lock();
-        StartCoroutine(movement.MoveToTarget(LevelManager.instance.ExitLocation.position));
+        StartCoroutine(movement.MoveToTarget(LevelManager.instance.ExitLocation.position, .999f, 1.2f));
     }
 }

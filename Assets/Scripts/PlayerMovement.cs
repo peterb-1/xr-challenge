@@ -56,13 +56,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
     /// <summary>
-	/// Smoothly move the player towards the target
+	/// Smoothly move the player towards a target
+    /// proportion defines the fraction of the distance that will be covered, and time defines how long it will take
 	/// </summary>
-    public IEnumerator MoveToTarget(Vector3 target)
+    public IEnumerator MoveToTarget(Vector3 target, float proportion, float time)
     {
-        for (int i = 0; i < 60; i++)
+        float iterations = time / Time.fixedDeltaTime;
+        float amount = 1 - Mathf.Pow(1 - proportion, 1 / iterations);
+
+        for (int i = 0; i < iterations; i++)
         {
-            rb.position = Vector3.Lerp(rb.position, target, 0.1f);
+            rb.position = Vector3.Lerp(rb.position, target, amount);
             yield return new WaitForSeconds(Time.fixedDeltaTime);
         }
     }
