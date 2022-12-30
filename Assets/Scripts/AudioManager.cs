@@ -10,8 +10,6 @@ public class AudioManager : MonoBehaviour
     AudioMixer mixer;
     [SerializeField]
     AudioSource[] sounds;
-    [SerializeField]
-    private PlayerHitbox playerHitbox;
 
     public static AudioManager instance;
 
@@ -25,12 +23,6 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
         }
-    }
-
-    void Start()
-    {
-        playerHitbox.OnDeath += DeathAudio;
-        playerHitbox.OnExit += ExitAudio;
     }
 
     /// <summary>
@@ -61,24 +53,6 @@ public class AudioManager : MonoBehaviour
                 return;
             }
         }
-    }
-
-    /// <summary>
-	/// Initiate the death audio sequence
-	/// </summary>
-    public void DeathAudio()
-    {
-        Play("Death");
-        LowPass(500f, .2f);
-    }
-
-    /// <summary>
-	/// Initiate the exit audio sequence
-	/// </summary>
-    public void ExitAudio()
-    {
-        Play("Exit");
-        LowPass(500f, .5f);
     }
 
     /// <summary>

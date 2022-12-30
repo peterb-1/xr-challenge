@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField]
     private TextMeshProUGUI scoreText;
+
     [SerializeField]
-    private GameObject deathUI;
+    private Animator deathAnim;
     [SerializeField]
-    private GameObject finishUI;
+    private Animator finishAnim;
+
     [SerializeField]
     private GameObject gameplayFilter;
     [SerializeField]
     private GameObject UIFilter;
+
     [SerializeField]
     private PlayerHitbox playerHitbox;
 
@@ -43,7 +47,7 @@ public class UIManager : MonoBehaviour
 	/// </summary>
     private void ShowDeathUI()
     {
-        deathUI.SetActive(true);
+        deathAnim.SetBool("active", true);
         gameplayFilter.SetActive(true);
     }
 
@@ -52,7 +56,7 @@ public class UIManager : MonoBehaviour
 	/// </summary>
     private void ShowEndUI()
     {
-        finishUI.SetActive(true);
+        finishAnim.SetBool("active", true);
         gameplayFilter.SetActive(true);
     }
 
@@ -72,10 +76,11 @@ public class UIManager : MonoBehaviour
     {
         UIFilter.SetActive(true);
 
+        deathAnim.SetBool("active", false);
+        finishAnim.SetBool("active", false);
+
         yield return new WaitForSeconds(.5f);
 
-        deathUI.SetActive(false);
-        finishUI.SetActive(false);
         gameplayFilter.SetActive(false);
 
         score = 0;

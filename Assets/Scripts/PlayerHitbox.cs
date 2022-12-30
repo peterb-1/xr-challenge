@@ -37,11 +37,18 @@ public class PlayerHitbox : MonoBehaviour
 
     private void HandleDeath()
     {
-        if (!GetComponent<Player>().dead) OnDeath?.Invoke();
+        if (!GetComponent<Player>().dead)
+        {
+            AudioManager.instance.Play("Death");
+            AudioManager.instance.LowPass(500f, .2f);
+            OnDeath?.Invoke();
+        }
     }
 
     private void HandleExit()
     {
+        AudioManager.instance.Play("Exit");
+        AudioManager.instance.LowPass(500f, .5f);
         OnExit?.Invoke();
     }
 }
