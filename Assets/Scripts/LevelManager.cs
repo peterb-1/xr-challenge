@@ -11,11 +11,13 @@ public class LevelManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField]
-    private GameObject exit;
+    private GameObject exitPrefab;
     [SerializeField]
     private Player player;
     [SerializeField]
     private PlayerHitbox playerHitbox;
+
+    private GameObject exit;
 
     public static LevelManager instance { get; private set; }
 
@@ -36,6 +38,9 @@ public class LevelManager : MonoBehaviour
         playerHitbox.OnPickUp += SpawnExit;
     }
 
+    /// <summary>
+	/// Restart the current level
+	/// </summary>
     public IEnumerator Reset()
     {
         yield return new WaitForSeconds(.5f);
@@ -47,6 +52,8 @@ public class LevelManager : MonoBehaviour
         {
             p.Init();
         }
+
+        Destroy(exit);
     }
 
     /// <summary>
@@ -59,6 +66,6 @@ public class LevelManager : MonoBehaviour
         {
             if (!p.IsCollected) return;
         }
-        Instantiate(exit, exitLocation, false);
+        exit = Instantiate(exitPrefab, exitLocation, false);
     }
 }

@@ -20,6 +20,9 @@ public class Player : MonoBehaviour
         hitbox.OnExit += EndLevel;
     }
 
+    /// <summary>
+	/// Respawn the player at the start of the level
+	/// </summary>
     public void Reset()
     {
         dead = false;

@@ -63,9 +63,6 @@ public class UIManager : MonoBehaviour
     {
         StartCoroutine(HideUI());
         StartCoroutine(LevelManager.instance.Reset());
-
-        score = 0;
-        scoreText.text = "SCORE: 0";
     }
 
     /// <summary>
@@ -80,6 +77,9 @@ public class UIManager : MonoBehaviour
         deathUI.SetActive(false);
         finishUI.SetActive(false);
         gameplayFilter.SetActive(false);
+
+        score = 0;
+        scoreText.text = "SCORE: 0";
 
         yield return new WaitForSeconds(.5f);
 
