@@ -33,7 +33,7 @@ public class PlayerHitbox : MonoBehaviour
 
     private void HandleDeath()
     {
-        OnDeath?.Invoke();
+        if (!GetComponent<Player>().dead) OnDeath?.Invoke();
     }
 
     private void HandleExit()

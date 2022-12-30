@@ -36,6 +36,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         playerHitbox.OnPickUp += SpawnExit;
+        AudioManager.instance.Play("BGM");
     }
 
     /// <summary>
@@ -43,6 +44,8 @@ public class LevelManager : MonoBehaviour
 	/// </summary>
     public IEnumerator Reset()
     {
+        AudioManager.instance.LowPass(22000f, 1f);
+
         yield return new WaitForSeconds(.5f);
 
         player.Reset();

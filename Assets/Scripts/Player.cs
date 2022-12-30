@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerMovement movement;
 
-    private bool dead;
+    public bool dead { get; private set; }
 
     void Start()
     {
