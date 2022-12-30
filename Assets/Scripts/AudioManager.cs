@@ -29,8 +29,8 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        playerHitbox.OnDeath += LowPass;
-        playerHitbox.OnExit += LowPass;
+        playerHitbox.OnDeath += DeathAudio;
+        playerHitbox.OnExit += ExitAudio;
     }
 
     /// <summary>
@@ -64,10 +64,20 @@ public class AudioManager : MonoBehaviour
     }
 
     /// <summary>
-	/// Initiate a low-pass filter fade
+	/// Initiate the death audio sequence
 	/// </summary>
-    public void LowPass()
+    public void DeathAudio()
     {
+        Play("Death");
+        LowPass(500f, .2f);
+    }
+
+    /// <summary>
+	/// Initiate the exit audio sequence
+	/// </summary>
+    public void ExitAudio()
+    {
+        Play("Exit");
         LowPass(500f, .5f);
     }
 

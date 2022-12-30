@@ -44,6 +44,7 @@ public class LevelManager : MonoBehaviour
 	/// </summary>
     public IEnumerator Reset()
     {
+        AudioManager.instance.Play("Retry");
         AudioManager.instance.LowPass(22000f, 1f);
 
         yield return new WaitForSeconds(.5f);
@@ -69,6 +70,8 @@ public class LevelManager : MonoBehaviour
         {
             if (!p.IsCollected) return;
         }
+
+        AudioManager.instance.Play("ExitSpawn");
         exit = Instantiate(exitPrefab, exitLocation, false);
     }
 }

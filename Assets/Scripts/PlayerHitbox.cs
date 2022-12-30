@@ -28,7 +28,11 @@ public class PlayerHitbox : MonoBehaviour
     private void HandlePickup(Collider other)
     {
         int score = other.gameObject.GetComponent<Pickup>().GetPickedUp();
-        if (score > -1) OnPickUp?.Invoke(score);
+        if (score > -1)
+        {
+            AudioManager.instance.Play("Pickup");
+            OnPickUp?.Invoke(score);
+        }
     }
 
     private void HandleDeath()
