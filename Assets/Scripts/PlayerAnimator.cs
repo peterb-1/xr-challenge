@@ -13,7 +13,16 @@ public class PlayerAnimator : MonoBehaviour
     private ParticleSystem deathEffect;
 
     /// <summary>
-	/// Play the death animation and effects.
+	/// Reset the player's animation state
+	/// </summary>
+    public void Reset()
+    {
+        enabled = true;
+        modelRenderer.enabled = true;
+    }
+
+    /// <summary>
+	/// Play the death animation and effects
 	/// </summary>
 	public void PlayDeath()
     {

@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private int movementSpeed;
 
     private Rigidbody rb;
+    private Vector3 spawn;
 
     private float mx;
     private float mz;
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        spawn = transform.position;
     }
 
     void Update()
@@ -37,6 +39,15 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = movementSpeed * Vector3.Normalize(rb.velocity);
         }
+    }
+
+    /// <summary>
+	/// Respawn the player and enable movement
+	/// </summary>
+    public void Reset()
+    {
+        locked = false;
+        transform.position = spawn;
     }
 
     /// <summary>

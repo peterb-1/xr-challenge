@@ -13,7 +13,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private GameObject exit;
     [SerializeField]
-    private PlayerHitbox player;
+    private Player player;
+    [SerializeField]
+    private PlayerHitbox playerHitbox;
 
     public static LevelManager instance { get; private set; }
 
@@ -31,7 +33,20 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        player.OnPickUp += SpawnExit;
+        playerHitbox.OnPickUp += SpawnExit;
+    }
+
+    public IEnumerator Reset()
+    {
+        yield return new WaitForSeconds(.5f);
+
+        player.Reset();
+
+        Pickup[] pickups = FindObjectsOfType<Pickup>();
+        foreach (Pickup p in pickups)
+        {
+            p.Init();
+        }
     }
 
     /// <summary>

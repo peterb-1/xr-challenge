@@ -20,6 +20,13 @@ public class Player : MonoBehaviour
         hitbox.OnExit += EndLevel;
     }
 
+    public void Reset()
+    {
+        dead = false;
+        animator.Reset();
+        movement.Reset();
+    }
+
     /// <summary>
 	///Play the death effect, and lock and completely stop the player's movement as they die
 	/// </summary>

@@ -9,22 +9,24 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI scoreText;
     [SerializeField]
-    private GameObject deathText;
+    private GameObject deathUI;
     [SerializeField]
-    private GameObject finishText;
+    private GameObject finishUI;
     [SerializeField]
-    private GameObject filter;
+    private GameObject gameplayFilter;
     [SerializeField]
-    private PlayerHitbox player;
+    private GameObject UIFilter;
+    [SerializeField]
+    private PlayerHitbox playerHitbox;
 
     private int score;
 
     private void Start()
     {
         score = 0;
-        player.OnPickUp += UpdateScore;
-        player.OnDeath += ShowDeathUI;
-        player.OnExit += ShowEndUI;
+        playerHitbox.OnPickUp += UpdateScore;
+        playerHitbox.OnDeath += ShowDeathUI;
+        playerHitbox.OnExit += ShowEndUI;
     }
 
     /// <summary>
@@ -41,8 +43,8 @@ public class UIManager : MonoBehaviour
 	/// </summary>
     private void ShowDeathUI()
     {
-        deathText.SetActive(true);
-        filter.SetActive(true);
+        deathUI.SetActive(true);
+        gameplayFilter.SetActive(true);
     }
 
     /// <summary>
@@ -50,7 +52,37 @@ public class UIManager : MonoBehaviour
 	/// </summary>
     private void ShowEndUI()
     {
-        finishText.SetActive(true);
-        filter.SetActive(true);
+        finishUI.SetActive(true);
+        gameplayFilter.SetActive(true);
+    }
+
+    /// <summary>
+	/// Restarts the current level
+	/// </summary>
+    public void Reset()
+    {
+        StartCoroutine(HideUI());
+        StartCoroutine(LevelManager.instance.Reset());
+
+        score = 0;
+        scoreText.text = "SCORE: 0";
+    }
+
+    /// <summary>
+	/// Hides the death/level-end UI
+	/// </summary>
+    IEnumerator HideUI()
+    {
+        UIFilter.SetActive(true);
+
+        yield return new WaitForSeconds(.5f);
+
+        deathUI.SetActive(false);
+        finishUI.SetActive(false);
+        gameplayFilter.SetActive(false);
+
+        yield return new WaitForSeconds(.5f);
+
+        UIFilter.SetActive(false);
     }
 }
