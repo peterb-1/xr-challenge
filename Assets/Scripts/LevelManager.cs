@@ -1,23 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    [Header("Config")]
-    [SerializeField]
-    private Transform exitLocation;
-    public Transform ExitLocation => exitLocation;
-
     [Header("References")]
     [SerializeField]
     private GameObject exitPrefab;
-    [SerializeField]
+
     private Player player;
-    [SerializeField]
     private PlayerHitbox playerHitbox;
 
     private GameObject exit;
+    public Transform exitLocation { get; private set; }
+
+    private int currentLevel;
 
     public static LevelManager instance { get; private set; }
 
@@ -30,13 +28,48 @@ public class LevelManager : MonoBehaviour
         else
         {
             instance = this;
+            DontDestroyOnLoad(this);
         }
     }
 
     void Start()
     {
-        playerHitbox.OnPickUp += SpawnExit;
+        currentLevel = 0;
         AudioManager.instance.Play("BGM");
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        Init();
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Init();
+    }
+
+    /// <summary>
+	/// Initialise the settings for the current level
+	/// </summary>
+    private void Init()
+    {
+        player = FindObjectOfType<Player>();
+        playerHitbox = player.GetComponent<PlayerHitbox>();
+        playerHitbox.OnPickUp += SpawnExit;
+
+        exitLocation = GameObject.FindWithTag("ExitLocation").transform;
+    }
+
+    /// <summary>
+	/// Move to the next level
+	/// </summary>
+    public IEnumerator NextLevel()
+    {
+        AudioManager.instance.Play("Click");
+        AudioManager.instance.LowPass(22000f, 1f);
+
+        yield return new WaitForSeconds(.5f);
+
+        currentLevel++;
+        SceneManager.LoadSceneAsync(currentLevel);
     }
 
     /// <summary>
@@ -44,7 +77,7 @@ public class LevelManager : MonoBehaviour
 	/// </summary>
     public IEnumerator Reset()
     {
-        AudioManager.instance.Play("Retry");
+        AudioManager.instance.Play("Click");
         AudioManager.instance.LowPass(22000f, 1f);
 
         yield return new WaitForSeconds(.5f);

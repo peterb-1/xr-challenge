@@ -61,6 +61,15 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
+	/// Moves to the next level
+	/// </summary>
+    public void NextLevel()
+    {
+        StartCoroutine(HideUI());
+        StartCoroutine(LevelManager.instance.NextLevel());
+    }
+
+    /// <summary>
 	/// Restarts the current level
 	/// </summary>
     public void Reset()

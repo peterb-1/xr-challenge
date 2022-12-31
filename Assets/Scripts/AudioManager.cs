@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     AudioSource[] sounds;
 
-    public static AudioManager instance;
+    public static AudioManager instance { get; private set; }
 
     void Awake()
     {
@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
         else
         {
             instance = this;
+            DontDestroyOnLoad(this);
         }
     }
 

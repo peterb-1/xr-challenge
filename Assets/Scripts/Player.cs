@@ -50,6 +50,6 @@ public class Player : MonoBehaviour
     {
         movement.Lock();
         movement.SetFriction(.6f);
-        StartCoroutine(movement.MoveToTarget(LevelManager.instance.ExitLocation.position, .999f, 1.2f));
+        StartCoroutine(movement.MoveToTarget(LevelManager.instance.exitLocation.position, .999f, 1.2f));
     }
 }
