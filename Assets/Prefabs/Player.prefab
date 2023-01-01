@@ -178,7 +178,7 @@ MonoBehaviour:
   jumpForce: 10
   fallMultiplier: 1.6
   jumpBuffer: 0.2
-  hangTime: 0.2
+  hangTime: 0.15
   foot: {fileID: 5326895905162044961}
   groundLayers:
     serializedVersion: 2
@@ -437,7 +437,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.21693665, g: 0.37315887, b: 0.6132076, a: 1}
+      maxColor: {r: 0.16420436, g: 0.37650463, b: 0.7735849, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

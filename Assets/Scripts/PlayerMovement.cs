@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
 	/// </summary>
     public void Reset()
     {
-        SetFriction(.02f);
+        SetFriction(0f);
         rb.useGravity = true;
         transform.position = spawn;
         locked = false;

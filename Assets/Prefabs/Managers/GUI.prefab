@@ -1038,7 +1038,6 @@ MonoBehaviour:
   finishAnim: {fileID: 7710506930584794080}
   gameplayFilter: {fileID: 7710506930760350217}
   UIFilterAnim: {fileID: 7710506930979096283}
-  playerHitbox: {fileID: 0}
 --- !u!114 &7710506931662255533
 MonoBehaviour:
   m_ObjectHideFlags: 0
