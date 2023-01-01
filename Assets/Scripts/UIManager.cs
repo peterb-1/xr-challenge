@@ -18,19 +18,18 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject gameplayFilter;
     [SerializeField]
-    private GameObject UIFilter;
-
-    [SerializeField]
-    private PlayerHitbox playerHitbox;
+    private Animator UIFilterAnim;
 
     private int score;
 
     private void Start()
     {
         score = 0;
-        playerHitbox.OnPickUp += UpdateScore;
-        playerHitbox.OnDeath += ShowDeathUI;
-        playerHitbox.OnExit += ShowEndUI;
+
+        PlayerHitbox ph = FindObjectOfType<PlayerHitbox>();
+        ph.OnPickUp += UpdateScore;
+        ph.OnDeath += ShowDeathUI;
+        ph.OnExit += ShowEndUI;
     }
 
     /// <summary>
@@ -65,7 +64,7 @@ public class UIManager : MonoBehaviour
 	/// </summary>
     public void NextLevel()
     {
-        StartCoroutine(HideUI());
+        StartCoroutine(HideUI(true));
         StartCoroutine(LevelManager.instance.NextLevel());
     }
 
@@ -74,16 +73,16 @@ public class UIManager : MonoBehaviour
 	/// </summary>
     public void Reset()
     {
-        StartCoroutine(HideUI());
+        StartCoroutine(HideUI(false));
         StartCoroutine(LevelManager.instance.Reset());
     }
 
     /// <summary>
 	/// Hides the death/level-end UI
 	/// </summary>
-    IEnumerator HideUI()
+    IEnumerator HideUI(bool nextLevel)
     {
-        UIFilter.SetActive(true);
+        UIFilterAnim.SetBool("active", true);
 
         deathAnim.SetBool("active", false);
         finishAnim.SetBool("active", false);
@@ -91,12 +90,9 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(.5f);
 
         gameplayFilter.SetActive(false);
+        if (!nextLevel) UIFilterAnim.SetBool("active", false);
 
         score = 0;
         scoreText.text = "SCORE: 0";
-
-        yield return new WaitForSeconds(.5f);
-
-        UIFilter.SetActive(false);
     }
 }
