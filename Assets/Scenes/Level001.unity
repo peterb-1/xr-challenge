@@ -8940,7 +8940,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 30, y: 1, z: 30}
+  m_Size: {x: 40, y: 1, z: 40}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1831657481
 Transform:
@@ -9295,8 +9295,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d04278d71204c042a92750adb26a6aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exitLocation: {fileID: 1405442467}
   exitPrefab: {fileID: 6648521189078569270, guid: acf45fb7680babe4b80f9d6b7078b10e,
     type: 3}
-  player: {fileID: 1342394710}
-  playerHitbox: {fileID: 1342394708}
